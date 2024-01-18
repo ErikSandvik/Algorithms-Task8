@@ -1,0 +1,1436 @@
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass fu-leksjon
+\begin_preamble
+
+\usepackage{multicol}
+\renewcommand{\forfatter}{Helge Hafting}
+
+\let\Bbbk\relax
+\usepackage{mtpro2}
+\end_preamble
+\use_default_options true
+\begin_modules
+svar
+logicalmkup
+\end_modules
+\maintain_unincluded_children false
+\language norsk
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "times" "TeX Gyre Termes"
+\font_sans "helvet" "Open Sans"
+\font_typewriter "courier" "TeX Gyre Cursor"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 92 92
+\font_tt_scale 100 100
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement tbh
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 0
+\use_package amssymb 0
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Register
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth -2
+\tocdepth 2
+\paragraph_separation skip
+\defskip smallskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style swiss
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Øving 8 algoritmer og datastrukturer
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Innledning
+\end_layout
+
+\begin_layout Standard
+Lag et program som kan lese en fil og lage en komprimert utgave.
+ Lag et annet program som pakker ut igjen (dekomprimerer) og gjenskaper
+ originalen.
+ 
+\end_layout
+
+\begin_layout Standard
+Bruk gjerne både 
+\series bold
+Lempel-Ziv
+\series default
+ og 
+\series bold
+Huffmankoding
+\series default
+ for å komprimere.
+ LZ gjør om fila til en blanding av bakoverreferanser og ukomprimerte strenger.
+ Innholdet i de ukomprimerte strengene komprimeres videre med Huffmannkoding.
+\end_layout
+
+\begin_layout Standard
+Det kan bli en del arbeid.
+ Håndtering av bits & bytes er nytt for mange.
+ Jobb gjerne i grupper, og fordel arbeidet.
+ 
+\emph on
+Les hele oppgaveteksten før dere begynner, unngå misforståelser!
+\end_layout
+
+\begin_layout Standard
+Det er anledning til å jobbe i gruppe her, selv om man har jobbet alene
+ på mindre øvinger.
+\end_layout
+
+\begin_layout Standard
+Jeg kommer til å lage en highscore-liste sortert på best kompresjon av 
+\begin_inset Quotes cld
+\end_inset
+
+diverse.lyx
+\begin_inset Quotes crd
+\end_inset
+
+.
+ For å komme på lista, må utpakking fungere feilfritt.
+ Den halvparten som ligger øverst på lista når fristen er ute, får et ekstra
+ poeng på oppgaven.
+ Så her har dere et valg: dere kan gjøre dette til en liten enkel oppgave
+ med de vanlige to poengene, eller legge mer arbeid i det med håp om å få
+ med ekstrapoenget også.
+\end_layout
+
+\begin_layout Subsection
+Testfiler for komprimering
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring Forelesning~(pdf)
+\noindent
+Oppgave
+\begin_inset space ~
+\end_inset
+
+(lyx) 
+\size small
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.idi.ntnu.no/emner/idatt2101/kompr/opg8-kompr.lyx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring Forelesning~(pdf)
+Forelesning
+\begin_inset space ~
+\end_inset
+
+(txt) 
+\size small
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.idi.ntnu.no/emner/idatt2101/kompr/diverse.txt
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring Forelesning~(pdf)
+Forelesning
+\begin_inset space ~
+\end_inset
+
+(lyx) 
+\size small
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.idi.ntnu.no/emner/idatt2101/kompr/diverse.lyx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring Forelesning~(pdf)
+100MB
+\begin_inset space ~
+\end_inset
+
+enwik8 
+\size small
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.idi.ntnu.no/emner/idatt2101/kompr/enwik8
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+enwik8 er en diger fil, de første 100MB av engelsk wikipedia.
+ Dere trenger ikke håndtere den for å få full uttelling, men har dere et
+ kjapt program, er det jo artig å prøve.
+ Denne fila brukes i rekordforsøk, der de beste har klart å presse den sammen
+ til ca.
+ 15MB.
+ Det er pengepremier for de som klarer bedre.
+\end_layout
+
+\begin_layout Section
+Krav til løsningen
+\end_layout
+
+\begin_layout Enumerate
+Send inn programmer for komprimering og dekomprimering, som klarer å komprimere
+ og pakke ut igjen minst to av testfilene.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Bruk en eller flere av algoritmene vi har sett på.
+ Å kombinere flere, gir ofte bedre resultat.
+ Dette kan gjøres med å lage flere uavhengige programmer, eller ett program
+ som implementerer flere teknikker.
+\end_layout
+
+\begin_layout Enumerate
+Den komprimerte fila må være 
+\emph on
+mindre enn originalen.
+ 
+\emph default
+Dette måles ved å se på filstørrelser.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Dekomprimeringsprogrammet må greie å gjenskape originalfila, når det bare
+ har den komprimerte fila å pakke ut.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Ingen ekstra filer, alt som trengs må finnes i den komprimerte fila.
+ Dekompresjon må altså virke uten å ha originalen tilgjengelig.
+ 
+\end_layout
+
+\begin_layout Enumerate
+At utpakket fil er helt lik originalen, kan f.eks.
+ testes med 
+\begin_inset Quotes cld
+\end_inset
+
+fc
+\begin_inset Quotes crd
+\end_inset
+
+ i windows, eller 
+\begin_inset Quotes cld
+\end_inset
+
+diff
+\begin_inset Quotes crd
+\end_inset
+
+ på linux/mac.
+ Test selv, før dere leverer øvingen.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Dere må lage programmene selv, ikke noe 
+\begin_inset Quotes cld
+\end_inset
+
+cut & paste
+\begin_inset Quotes crd
+\end_inset
+
+ fra nettet.
+ Det er mye å lære av å gjøre en slik oppgave, som en ikke får med seg med
+ 
+\begin_inset Quotes cld
+\end_inset
+
+cut & paste
+\begin_inset Quotes crd
+\end_inset
+
+.
+ Både når det gjelder algoritmene, og generell programmering.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Komprimering og utpakking 
+\emph on
+skal 
+\emph default
+skje i separate kjøringer.
+ Det er
+\emph on
+ ikke 
+\emph default
+greit å ha ett samleprogram som både gjør innpakking og utpakking i 
+\emph on
+en
+\emph default
+ operasjon! Utpakking skal 
+\emph on
+bare 
+\emph default
+trenge den komprimerte fila, ikke noen variabler/datastrukturer fra innpakkinga.
+ Det sikres ved at inn- og utpakking 
+\emph on
+ikke 
+\emph default
+skjer i samme kjøring.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Dere 
+\emph on
+kan 
+\emph default
+ha ett stort program som gjør hele jobben, men det må i så fall være i to
+ separate kjøringer.
+ Et slikt program må altså stoppe etter komprimering, og kjøres igang med
+ andre parametre for å pakke ut.
+ Eller dere kan ha separate programmer.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Programmene må lese og skrive 
+\emph on
+filer
+\emph default
+.
+ Altså ikke bare testdata i en tabell.
+ Filene ligger i den mappa programmet kjører i.
+ Jeg må kunne teste på forskjellige filer.
+\end_layout
+
+\begin_layout Enumerate
+Programmet bruker 
+\emph on
+ikke 
+\emph default
+Hasmap, Hashset eller andre former for hashtabeller.
+ (Dette for å unngå de vanligste kokeoppskriftene, som bruker hashing.) Det
+ er ikke bruk for hashing her – ingen hashing i eksemplene jeg har vist
+ dere.
+\end_layout
+
+\begin_layout Subsection
+Tips for best kompresjon
+\end_layout
+
+\begin_layout Standard
+Det enkleste er å gjøre Huffman- og LZ-delene helt separat.
+ Man kan fordele arbeidet på gruppa på denne måten, og sette sammen til
+ slutt.
+ Debuggingen blir også enklere.
+ Men det er ikke dette som gir best kompresjon.
+\end_layout
+
+\begin_layout Standard
+Lempel-Ziv lager koder for repeterte strenger, samt tekststrenger som ikke
+ lot seg komprimere.
+ Strengene som ikke lot seg komprimere med LZ, kan Huffman-delen ta seg
+ av.
+ Huffman-kompresjon fungerer vanligvis ikke så godt på kodene for repeterte
+ strenger, så et smart Huffman-program kan skrive disse delene som de er,
+ uten å forsøke å komprimere dem.
+ Et slikt opplegg blir som regel bedre, men er noe mer arbeid å kode.
+\end_layout
+
+\begin_layout Standard
+Når LZ ser etter repeterte strenger, vil kompresjon avhenge av hvor langt
+ bakover LZ leter, og hvor kompakte referanser dere klarer å lage.
+ Her er det rom for eksperimentering!
+\end_layout
+
+\begin_layout Standard
+Run-length coding er enkelt, men oppnår ikke mye på testfilene.
+\end_layout
+
+\begin_layout Subsection
+Tips om hele oppgaven
+\end_layout
+
+\begin_layout Standard
+Det er lett å gjøre feil, og vanskelig å debugge.
+ Når noe går galt, bruk testfiler som er så små at dere kan følge med på
+ alt som skjer hele veien.
+ F.eks.
+ en testfil med bare 3–20 byte.
+ Da blir det lettere å se når noe går galt.
+ En måte er å bruke en debugger som kan vise innholdet i variabler.
+ En annen måte er å legge inn debug-utskrifter for å se hva som skjer.
+\end_layout
+
+\begin_layout Standard
+Om dere bruker flere teknikker, som LZ+Huffmann, er der lurt å teste og
+ lage LZ-delen og Huffmann-delen hver for seg.
+ Programmer som zip gjør alt i memory for å være raske.
+ Men det er ikke noe galt i å ha ett program som gjør LZ-komprimeringen
+ og skriver sitt resultat til fil, og deretter et Huffmann-program som leser
+ denne fila og skriver en ny og mer komprimert fil.
+ Dekomprimering kan håndteres tilsvarende.
+ Da kan hvert trinn testes og debugges for seg.
+ Dette gjør det også lettere å dele på arbeidet i gruppa.
+ 
+\end_layout
+
+\begin_layout Section
+Tips om Lempel-Ziv
+\end_layout
+
+\begin_layout Subsection
+Filer
+\end_layout
+
+\begin_layout Standard
+Normalt blir det veldig lite kompresjon på små filer.
+ Bittesmå filer kan brukes for å debugge programmet, men for å teste kompresjon
+ bør filene være noen titalls kilobyte.
+\end_layout
+
+\begin_layout Standard
+Det blir noen avgjørelser å ta, som f.eks.
+ hvor langt bakover programmet deres skal lete etter repeterte sekvenser.
+ Zip leter 32kB bakover, det fins også versjoner som går 64kB tilbake.
+ Hvis dere lar programmet gå lenger tilbake, vil det bli tregere men sannsynligv
+is komprimere bedre også.
+\end_layout
+
+\begin_layout Standard
+Om en vil ha et veldig kjapt program, kan det lønne seg å la seg inspirere
+ av avanserte tekstsøkalgoritmer.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Filformat
+\end_layout
+
+\begin_layout Standard
+Filformat bestemmer dere selv.
+ Det kan fort bli en avveiing mellom hvor komplisert programmet skal være,
+ og hvor godt det skal komprimere.
+\end_layout
+
+\begin_layout Standard
+Den komprimerte fila kan bestå av blokker.
+ Hver blokk starter med en byte-verdi, som er et tall mellom -128 og +127.
+ Hvis tallet er negativt, f.eks.
+ -57, betyr det at det er en serie med tegn som ikke lot seg komprimere.
+ (I dette eksempelet, 57 tegn).
+ 
+\end_layout
+
+\begin_layout Standard
+Hvis tallet er positivt, angir det lengden på en repetert sekvens.
+ De neste 1, 2 eller 4 byte er et heltall som forteller hvor langt bakover
+ i fila denne sekvensen er å finne.
+ Med 1
+\begin_inset space \thinspace{}
+\end_inset
+
+byte (byte) er det bare mulig å gå 127 tegn bakover.
+ Programmet blir raskt, men komprimerer ikke så kraftig.
+ Med 2
+\begin_inset space \thinspace{}
+\end_inset
+
+byte (short) går det an å gå opp til 32
+\begin_inset space \thinspace{}
+\end_inset
+
+kB bakover, men vi bruker altså opp en ekstra byte.
+ Med 4
+\begin_inset space \thinspace{}
+\end_inset
+
+byte (int) kan vi gå opp til 2
+\begin_inset space \thinspace{}
+\end_inset
+
+GB bakover.
+ Det gir mange flere muligheter for å finne repeterte strenger, men bruker
+ også mer plass.
+ Et program som leter opptil 2
+\begin_inset space \thinspace{}
+\end_inset
+
+GB bakover, blir sannsynligvis temmelig tregt også.
+ Det kan lønne seg å begrense litt\SpecialChar ldots
+
+\end_layout
+
+\begin_layout Subsection
+Litt om å kombinere LZ og Huffmann
+\end_layout
+
+\begin_layout Standard
+Det enkleste er å gjøre de to delene separat.
+ I så fall komprimerer man med LZ først, og deretter med Huffmann.
+ Prøv gjerne omvendt, men ikke regn med god kompresjon på det viset.
+\end_layout
+
+\begin_layout Standard
+Man kan få bedre kompresjon ved å se på hva slags data LZ lager.
+ Referanser bakover er et antall byte som blir temmelig tilfeldig.
+ Tilfeldige data komprimeres ikke bra med Huffmann, så det er bedre å holde
+ slikt utenfor slik at Huffmann bare komprimerer data og ikke disse referansene.
+ Antall byte som refereres har derimot en kjent fordeling; det er mange
+ fler referanser til korte data (ord o.l.) enn lange strenger.
+ Så Huffmannkomprimering kan brukes på strenglengder.
+ Beste måte er i så fall å ha ett huffmantre for data, og et annet tre for
+ strenglengder.
+ Da kan begge deler kodes med ganske korte koder.
+ 
+\end_layout
+
+\begin_layout Section
+Litt om Lempel-Ziv-Welsh
+\end_layout
+
+\begin_layout Standard
+LZW bygger opp en ordbok/dictionary, og sparer plass ved å angi ordnumre
+ i stedet for å lagre ordene i output.
+ Til å begynne med inneholder ordboka de 256 mulige enkeltbytes, som har
+ numre fra 0 til 255.
+ Kompresjon oppnås ved å legge til ord (eller bokstavkombinasjoner) som
+ forekommer ofte.
+ Ulike måter for å legge til ord eller kortere sekvenser, gir ulik kompresjon.
+ Man kan legge inn hver eneste sekvens som dukker opp: man får raskt noe
+ å komprimere, men får fort så mange 
+\begin_inset Quotes cld
+\end_inset
+
+ord
+\begin_inset Quotes crd
+\end_inset
+
+ at det trengs mange bits for å referere til dem.
+ En annen måte er å legge inn nye ord bare når de forekommer for andre eller
+ tredje gang.
+ Færre ord i ordboka, men de man får, forekommer oftere.
+ Det kan gi bedre kompresjon.
+\end_layout
+
+\begin_layout Standard
+Man lagrer aldri ordboka.
+ Hele poenget med LZW er at utpakkingsdelen kan bygge opp ordboka på samme
+ måte som innpakkingsdelen gjorde, ved å se på hva som har blitt pakket
+ ut så langt.
+ Plass spares ved at numrene som regel er kortere enn ord/tegnsekvenser
+ de refererer til.
+\end_layout
+
+\begin_layout Subsection
+Kombinere LZW og Huffmann
+\end_layout
+
+\begin_layout Standard
+LZW lager en output som består av numre.
+ I begynnelsen numre for diverse bytes, etterhvert også numre for ord som
+ LZW har oppdaget.
+ Man kan telle opp hvor mange det er av hvert nummer, og lage et Huffmantre.
+ De ord/bytes som forekommer ofte, får da korte Huffmannkoder og vi sparer
+ mer plass.
+\end_layout
+
+\begin_layout Section
+Om Huffmankoding
+\end_layout
+
+\begin_layout Standard
+Lag et program som leser inn en fil, teller frekvenser og genererer en huffmannt
+re ut fra byte-verdiene i filen.
+ Deretter bruker programmet huffmanntreet til å skrive en komprimert huffmannkod
+et fil.
+ 
+\end_layout
+
+\begin_layout Standard
+For å pakke ut, trenger utpakkingsprogrammet nok informasjon til å gjenskape
+ huffmantreet.
+ Det enkleste er å legge frekvenstabellen først i den komprimerte fila.
+ Adaptiv huffmankoding er en mer avansert løsning.
+ For å slippe overhead med en lagret tabell, skriver man heller en 
+\begin_inset Quotes cld
+\end_inset
+
+blokk
+\begin_inset Quotes crd
+\end_inset
+
+ uten kompresjon.
+ Neste blokk komprimeres med et huffmanntre basert på forrige blokk.
+ Poenget med dette, er at utpakkingsprogrammet kan gjøre det samme.
+ Et problem med slike løsninger, er at en blokk kan inneholde tegn som ikke
+ var i den forrige blokka, og det må håndteres.
+ En måte er å gi tegn som ikke er med, en lav frekvens i stedet for 0.
+ En annen måte er å ha en escape-kode for slike tilfeller.
+ Når programmet dekoder en escapekode, leser det deretter inn et tegn som
+ ikke er komprimert med huffmannkoding.
+ 
+\end_layout
+
+\begin_layout Subsection
+Tips om Huffmankoding
+\end_layout
+
+\begin_layout Subsubsection
+Huffmanndata som trengs for å pakke ut igjen
+\end_layout
+
+\begin_layout Standard
+Det er ikke nødvendig å lagre huffmanntreet, det holder å lagre frekvenstabellen.
+ Utpakkingsprogrammet kan dermed bygge opp samme tre ut fra frekvensene.
+ 
+\end_layout
+
+\begin_layout Kode-liten
+int frekvenser[256];
+\end_layout
+
+\begin_layout Standard
+En slik frekvenstabell blir alltid 1
+\begin_inset space \thinspace{}
+\end_inset
+
+kB.
+ Filen som skal komprimeres må dermed være stor nok til at komprimeringen
+ sparer mer enn 1
+\begin_inset space \thinspace{}
+\end_inset
+
+kB.
+ Testfilene jeg lenker til, skulle være store nok.
+\end_layout
+
+\begin_layout Subsubsection
+Om bitstrenger
+\end_layout
+
+\begin_layout Standard
+En bitstreng er 
+\emph on
+ikke 
+\emph default
+en streng som dette: "00001101".
+ Dette er en 
+\emph on
+tekststreng 
+\emph default
+med 8
+\begin_inset space \thinspace{}
+\end_inset
+
+tegn.
+ Skriver vi dette til en fil, går det med 8
+\begin_inset space \thinspace{}
+\end_inset
+
+byte, og vi oppnår ikke noe datakompresjon.
+ Tvert imot får vi en veldig stor fil!
+\end_layout
+
+\begin_layout Standard
+Men bitstrengen 0b00001101 er det samme som tallet 13, og kan lagres som
+ én byte.
+\end_layout
+
+\begin_layout Standard
+Datatypen 
+\begin_inset Quotes cld
+\end_inset
+
+long
+\begin_inset Quotes crd
+\end_inset
+
+ er på 64 bit.
+ Ingen tegn vil trenge lenger Huffmankode enn det.
+ (Det kan vises at nå man komprimerer en fil på 2.7GB, trenger ingen tegn
+ kodes med mer enn 44 bit.) 
+\begin_inset Quotes cld
+\end_inset
+
+long
+\begin_inset Quotes crd
+\end_inset
+
+ er dermed egnet til å lagre bitstrenger.
+ En 
+\begin_inset Quotes cld
+\end_inset
+
+long
+\begin_inset Quotes crd
+\end_inset
+
+ har alltid 64 bit, så en bitstreng-klasse må også ha et felt som forteller
+ hvor mange av bitene som er med i bitstrengen.
+\end_layout
+
+\begin_layout Standard
+Å skrive bitstrenger til fil, blir en del ekstra arbeid.
+ Java lar oss bare skrive hele byte, og for å være effektive bør vi bare
+ skrive byte-array av en viss størrelse.
+ Men, med høyre/venstreskift samt binære & og | -operasjoner, kan vi få
+ våre bitstrenger inn i et byte-array som så kan skrives til disk.
+ 
+\end_layout
+
+\begin_layout Standard
+Tilsvarende for lesing: Vi leser inn et byte-array, og plukker deretter
+ ut én og én bit for å navigere gjennom huffmanntreet.
+\end_layout
+
+\begin_layout Subsubsection
+Om koking
+\end_layout
+
+\begin_layout Standard
+På nettet fins mange implementasjoner av Huffmannkoding.
+ De har sine særegenheter som vi kjenner igjen.
+ Programmer som bruker hashset/hasmap vil bli underkjent som kok.
+ Hashtabeller trengs ikke for å løse denne oppgaven.
+\end_layout
+
+\begin_layout Subsection
+Delvis uttelling
+\end_layout
+
+\begin_layout Standard
+Ikke gi opp, om hele oppgaven blir for vanskelig.
+ Delvis uttelling for oppgaver som:
+\end_layout
+
+\begin_layout Itemize
+Har noen få feil ved utpakking.
+ Her må jeg kunne se at fila som pakkes ut har mye av det samme innholdet,
+ så det går ikke med bare rot.
+ Men noen feil her og der, holder til delvis uttelling.
+\end_layout
+
+\begin_layout Itemize
+Klarer å pakke inn/ut deres egne testfiler, men ikke mine.
+ Send i så fall med en testfil som fungerer.
+ Det hender f.eks.
+ at noen lager programmer som bare håndterer ascii-tekst.
+\end_layout
+
+\begin_layout Section
+Javatips for begge deloppgaver
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Datatype
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+bits
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+byte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+max
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+byte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+short
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-32
+\begin_inset space \thinspace{}
+\end_inset
+
+768
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\begin_inset space \thinspace{}
+\end_inset
+
+767
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+char
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65
+\begin_inset space \thinspace{}
+\end_inset
+
+535
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+int
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-2147483648
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2147483647
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+long
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-9223372036854775808
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9223372036854775807
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Programmer som leser én og én byte fra fil, blir alltid trege i Java.
+ For å få noe fart i sakene, lønner det seg å lese/skrive større blokker,
+ f.eks.
+ et array med bytes.
+ Men det er ikke et krav, poenget er kompresjon, ikke hastighet.
+ 
+\end_layout
+
+\begin_layout Standard
+Noe bitfikling blir det uansett med Huffmannoppgaven.
+ Det går ikke an å skrive 
+\begin_inset Quotes cld
+\end_inset
+
+en halv byte
+\begin_inset Quotes crd
+\end_inset
+
+ til fil, man må i det minste samle opp bits til man har en hel byte.
+ Det kan være lurt å lage en egen klasse for å sende bitstrenger til fil.
+\end_layout
+
+\begin_layout Subsection
+Noen kodeeksempler, bitoperasjoner og filbehandling
+\end_layout
+
+\begin_layout Kode-liten
+//Åpne filer:
+\end_layout
+
+\begin_layout Kode-liten
+innfil = new DataInputStream(new BufferedInputStream(new FileInputStream(inn_nav
+n)));
+\end_layout
+
+\begin_layout Kode-liten
+utfil = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(ut_na
+vn)));
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//Lese data fra fil inn i byte-array:
+\end_layout
+
+\begin_layout Kode-liten
+//   byte []data  : arrayet vi leser inn i
+\end_layout
+
+\begin_layout Kode-liten
+//   int posisjon : index i byte-array for det vi leser inn
+\end_layout
+
+\begin_layout Kode-liten
+//   int mengde   : antall byte vi vil lese inn
+\end_layout
+
+\begin_layout Kode-liten
+innfil.readFully(data, posisjon, mengde);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//Lese inn én byte
+\end_layout
+
+\begin_layout Kode-liten
+byte x;
+\end_layout
+
+\begin_layout Kode-liten
+x = innfil.readByte();
+\end_layout
+
+\begin_layout Kode-liten
+//Har også:
+\end_layout
+
+\begin_layout Kode-liten
+short s = innfil.readShort();
+\end_layout
+
+\begin_layout Kode-liten
+char c = innfil.readChar();
+\end_layout
+
+\begin_layout Kode-liten
+int i = innfil.readInt();
+\end_layout
+
+\begin_layout Kode-liten
+long l = innfil.readLong();
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//Skrive data fra byte-array til fil:
+\end_layout
+
+\begin_layout Kode-liten
+utfil.write(data, posisjon, mengde);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//Skrive én byte til fil:
+\end_layout
+
+\begin_layout Kode-liten
+byte singlebyte = 17;
+\end_layout
+
+\begin_layout Kode-liten
+utfil.writeByte(singlebyte);
+\end_layout
+
+\begin_layout Kode-liten
+//Har også: 
+\end_layout
+
+\begin_layout Kode-liten
+//utfil.writeChar(char c); 
+\end_layout
+
+\begin_layout Kode-liten
+//utfil.writeShort(short s);
+\end_layout
+
+\begin_layout Kode-liten
+//utfil.writeInt(int i);   
+\end_layout
+
+\begin_layout Kode-liten
+//utfil.writeLong(long l);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//Hente 13 bit fra long1, 8 bit fra long2 og 4 bit fra long3, 
+\end_layout
+
+\begin_layout Kode-liten
+//og få det inn i et byte-array:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+byte[] data = new byte[3];
+\end_layout
+
+\begin_layout Kode-liten
+long long1 = 0b1101000010011; //13 bit
+\end_layout
+
+\begin_layout Kode-liten
+long long2 = 0b11100111;      //8 bit
+\end_layout
+
+\begin_layout Kode-liten
+long long3 = 0b010;           //3 bit
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//8 første bit fra long1 til data[0]
+\end_layout
+
+\begin_layout Kode-liten
+//øvrige bits maskeres bort med &
+\end_layout
+
+\begin_layout Kode-liten
+data[0] = (byte)(long1 & 0b11111111);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//5 gjenværende bit fra long1 til data[1]
+\end_layout
+
+\begin_layout Kode-liten
+//høyreskiftet fjerner bits vi allerede har lagt i data[0]
+\end_layout
+
+\begin_layout Kode-liten
+//trenger ikke maskere fordi resterende bits i long1 er 0.
+\end_layout
+
+\begin_layout Kode-liten
+data[1] = (byte)(long1 >> 8);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//data[1] har plass til 3 av de 8 bit fra long2
+\end_layout
+
+\begin_layout Kode-liten
+//venstreskifter 5 plasser fordi de 5 første bits i data[1] er i bruk fra
+ før
+\end_layout
+
+\begin_layout Kode-liten
+//trenger ikke maskere vekk bits fordi bits over 256 ikke går inn i en byte
+ uansett
+\end_layout
+
+\begin_layout Kode-liten
+data[1] |= (byte)(long2 << 5);
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//5 gjenværende bit fra long2 til data[2]
+\end_layout
+
+\begin_layout Kode-liten
+//høyreskift fjerner de bits vi allerede la i data[1]
+\end_layout
+
+\begin_layout Kode-liten
+data[2] = (byte)(long2 >> 3); 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+//data[2] har plass til de 3 bit fra long3
+\end_layout
+
+\begin_layout Kode-liten
+data[2] |= (byte)(long3 << 5);
+\end_layout
+
+\begin_layout Kode-liten
+System.out.printf("%x %x %x
+\backslash
+n", data[0], data[1], data[2]);
+\end_layout
+
+\end_body
+\end_document
